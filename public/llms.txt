@@ -1,0 +1,15 @@
+# Abdelhamed Nada
+
+> Portfolio of Abdelhamed Nada — full-stack developer crafting cinematic, production-grade frontends with React, Next.js, TypeScript, and Supabase.
+
+## Pages
+
+- [Home](/): Overview, featured work, skills, and process.
+- [About](/about): Background, key strengths, technical skills, and education.
+- [Projects](/projects): Selected shipped work — public and in production.
+- [GitHub Bot case study](/projects/github-bot): Deep dive on the GitHub Bot project.
+- [Contact](/contact): Get in touch for freelance or full-time engagements.
+
+## Writing
+
+- [Building Cinematic Developer Portfolios](/blog/building-cinematic-portfolios): Technical guide on shipping cinematic portfolios with Three.js, Framer Motion, and TanStack Start.

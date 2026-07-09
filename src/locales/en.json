@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact",
+    "dev": "Dev Mode",
+    "cta": "Start a project"
+  },
+  "hero": {
+    "badge": "Available for select engagements",
+    "title_pre": "Crafting interfaces that",
+    "title_grad": "behave like product",
+    "title_post": ".",
+    "subtitle": "Full-Stack Developer focused on cinematic frontends. I build production-grade web apps with React, Next.js, TypeScript and Supabase — with AI woven into the workflow.",
+    "view_work": "View work",
+    "lets_talk": "Let's talk",
+    "scroll": "Scroll"
+  },
+  "about": {
+    "kicker": "About",
+    "title": "Engineering at the edge of design.",
+    "education": "Education",
+    "download_cv": "Email me for CV"
+  },
+  "skills": {
+    "kicker": "Capabilities",
+    "title": "A focused, modern stack."
+  },
+  "projects": {
+    "kicker": "Selected work",
+    "title": "Shipped, public, real.",
+    "view_case": "Open case study",
+    "live": "Live site",
+    "code": "Source",
+    "back": "All projects",
+    "stack": "Stack",
+    "overview": "Overview",
+    "features": "Features",
+    "architecture": "Architecture",
+    "security": "Security",
+    "commands": "Commands",
+    "gallery": "Gallery"
+  },
+  "process": {
+    "kicker": "How I work",
+    "title": "A repeatable path from idea to production."
+  },
+  "contact": {
+    "kicker": "Contact",
+    "title": "Tell me about your project.",
+    "subtitle": "I read every message and reply within one business day.",
+    "name": "Your name",
+    "email": "Email",
+    "message": "What are you building?",
+    "send": "Send message",
+    "or": "Or message me directly on",
+    "sent": "Message ready. Your email client will open.",
+    "whatsapp": "Open WhatsApp",
+    "errors": {
+      "name": "Please enter your name.",
+      "email": "Please enter a valid email.",
+      "message": "Please write a short message."
+    }
+  },
+  "footer": {
+    "tagline": "Designed, engineered, and deployed by Abdelhamed Nada.",
+    "rights": "All rights reserved.",
+    "made_with": "Built with TanStack Start, Three.js & Motion."
+  },
+  "intro": {
+    "skip": "Skip"
+  },
+  "notfound": {
+    "title": "Lost in space",
+    "subtitle": "The page you were looking for drifted into the void.",
+    "home": "Return home"
+  },
+  "dev": {
+    "title": "Developer Mode",
+    "subtitle": "What's running under the hood.",
+    "arch": "Architecture",
+    "stack": "Tech Stack",
+    "libs": "Libraries"
+  }
+}
