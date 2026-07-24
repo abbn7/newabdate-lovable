@@ -9,28 +9,28 @@ function GlassTorus({ isLowPower }: { isLowPower: boolean }) {
   
   useFrame((_, delta) => {
     if (!ref.current) return;
-    ref.current.rotation.x += delta * 0.15;
-    ref.current.rotation.y += delta * 0.18;
+    ref.current.rotation.x += delta * 0.12;
+    ref.current.rotation.y += delta * 0.15;
   });
 
   return (
-    <Float speed={1} rotationIntensity={0.3} floatIntensity={1}>
+    <Float speed={0.8} rotationIntensity={0.2} floatIntensity={0.8}>
       <mesh ref={ref} scale={1.15}>
-        <torusKnotGeometry args={[1, 0.32, isLowPower ? 64 : 128, 20]} />
+        <torusKnotGeometry args={[1, 0.32, isLowPower ? 48 : 96, 16]} />
         <MeshTransmissionMaterial
-          backside
-          samples={isLowPower ? 4 : 8}
-          resolution={isLowPower ? 128 : 256}
+          backside={!isLowPower}
+          samples={isLowPower ? 2 : 6}
+          resolution={isLowPower ? 64 : 192}
           transmission={1}
-          roughness={0.1}
-          thickness={1.2}
-          ior={1.2}
-          chromaticAberration={0.04}
+          roughness={0.15}
+          thickness={1}
+          ior={1.15}
+          chromaticAberration={0.02}
           anisotropy={0.1}
-          distortion={0.1}
-          distortionScale={0.1}
-          temporalDistortion={0.05}
-          clearcoat={0.5}
+          distortion={0}
+          distortionScale={0}
+          temporalDistortion={0}
+          clearcoat={0.3}
           attenuationDistance={2}
           attenuationColor={"#ffffff"}
           color={"#ffffff"}
@@ -40,7 +40,7 @@ function GlassTorus({ isLowPower }: { isLowPower: boolean }) {
   );
 }
 
-// Optimized DemandDriver that only invalidates when needed
+// Optimized DemandDriver that only invalidates when visible and tab is active
 function DemandDriver() {
   const invalidate = useThree((s) => s.invalidate);
   useEffect(() => {
@@ -54,9 +54,10 @@ function DemandDriver() {
     }
 
     const tick = (time: number) => {
-      // Cap frame rate to ~60fps to save main thread on high-refresh screens
-      if (time - lastTime >= 16) {
-        if (document.visibilityState === "visible") {
+      // Throttle to ~45fps on mobile/low-power to save battery/heat, 60fps otherwise
+      const threshold = 22; // ~45fps
+      if (time - lastTime >= threshold) {
+        if (document.visibilityState === "visible" && document.hasFocus()) {
           invalidate();
         }
         lastTime = time;
@@ -69,11 +70,13 @@ function DemandDriver() {
     };
 
     document.addEventListener("visibilitychange", onVis);
+    window.addEventListener("focus", onVis);
     raf = requestAnimationFrame(tick);
     
     return () => {
       cancelAnimationFrame(raf);
       document.removeEventListener("visibilitychange", onVis);
+      window.removeEventListener("focus", onVis);
     };
   }, [invalidate]);
   return null;
@@ -84,11 +87,12 @@ export default function HeroCanvas() {
     if (typeof navigator === "undefined") return false;
     const cores = navigator.hardwareConcurrency ?? 8;
     const coarse = typeof matchMedia !== "undefined" && matchMedia("(pointer: coarse)").matches;
-    return coarse || cores <= 4;
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    return coarse || cores <= 4 || isMobile;
   }, []);
 
   const [dpr, setDpr] = useState<[number, number]>(
-    isLowPower ? [1, 1] : [1, 1.5]
+    isLowPower ? [0.8, 1] : [1, 1.25]
   );
 
   return (
@@ -98,23 +102,19 @@ export default function HeroCanvas() {
       gl={{
         antialias: !isLowPower,
         alpha: true,
-        powerPreference: isLowPower ? "low-power" : "high-performance",
+        powerPreference: "low-power",
         stencil: false,
         depth: true,
       }}
       camera={{ position: [0, 0, 4.5], fov: 38 }}
-      onCreated={({ gl }) => {
-        gl.setClearColor(0x000000, 0);
-      }}
     >
       <PerformanceMonitor
-        onDecline={() => setDpr(([min]) => [min, Math.max(min, 1)])}
+        onDecline={() => setDpr(([min]) => [min, Math.max(min, 0.8)])}
       />
       <DemandDriver />
       <ambientLight intensity={0.5} />
-      <directionalLight position={[3, 4, 5]} intensity={1.2} color="#7d6cff" />
-      <directionalLight position={[-4, -2, 3]} intensity={0.8} color="#5fc8e8" />
-      <directionalLight position={[0, -3, -4]} intensity={0.5} color="#e89cd8" />
+      <directionalLight position={[3, 4, 5]} intensity={1} color="#7d6cff" />
+      <directionalLight position={[-4, -2, 3]} intensity={0.7} color="#5fc8e8" />
       <GlassTorus isLowPower={isLowPower} />
     </Canvas>
   );

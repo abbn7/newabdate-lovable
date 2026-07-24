@@ -22,9 +22,9 @@ export function TextRotator({
       <AnimatePresence mode="wait">
         <motion.span
           key={items[i]}
-          initial={{ y: "0.6em", opacity: 0, filter: "blur(8px)" }}
-          animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-          exit={{ y: "-0.6em", opacity: 0, filter: "blur(8px)" }}
+          initial={{ y: "0.6em", opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: "-0.6em", opacity: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="inline-block"
         >

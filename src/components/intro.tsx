@@ -23,7 +23,7 @@ export function IntroExperience() {
         <motion.div
           key="intro"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, filter: "blur(10px)", scale: 1.04 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="fixed inset-0 z-[100] grid place-items-center bg-black"
         >

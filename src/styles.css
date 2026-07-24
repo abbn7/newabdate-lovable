@@ -2,9 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 
-/* Note: @fontsource packages by default include font-display: swap. 
-   If custom font-face were used, we would add it manually. 
-   We ensure the critical path is clear by using swap in our theme. */
+/* Note: @fontsource packages by default include font-display: swap. */
 @import "@fontsource/instrument-serif/400.css";
 @import "@fontsource/instrument-serif/400-italic.css";
 @import "@fontsource/inter/400.css";
@@ -82,13 +80,13 @@
   --input: oklch(1 0 0 / 12%);
   --ring: oklch(0.75 0.12 280);
 
-  /* Glass layered surfaces */
+  /* Glass layered surfaces - Optimized opacity */
   --glass-1: oklch(1 0 0 / 4%);
-  --glass-2: oklch(1 0 0 / 7%);
-  --glass-3: oklch(1 0 0 / 10%);
-  --glass-4: oklch(1 0 0 / 14%);
+  --glass-2: oklch(1 0 0 / 6%);
+  --glass-3: oklch(1 0 0 / 8%);
+  --glass-4: oklch(1 0 0 / 12%);
   --glass-border: oklch(1 0 0 / 10%);
-  --glass-highlight: oklch(1 0 0 / 16%);
+  --glass-highlight: oklch(1 0 0 / 12%);
   --aurora-a: #7d6cff;
   --aurora-b: #5fc8e8;
   --aurora-c: #e89cd8;
@@ -115,17 +113,12 @@
   --input: oklch(0 0 0 / 12%);
   --ring: oklch(0.45 0.12 280);
 
-  --glass-1: oklch(1 0 0 / 50%);
-  --glass-2: oklch(1 0 0 / 60%);
-  --glass-3: oklch(1 0 0 / 70%);
-  --glass-4: oklch(1 0 0 / 80%);
+  --glass-1: oklch(1 0 0 / 45%);
+  --glass-2: oklch(1 0 0 / 55%);
+  --glass-3: oklch(1 0 0 / 65%);
+  --glass-4: oklch(1 0 0 / 75%);
   --glass-border: oklch(0 0 0 / 8%);
-  --glass-highlight: oklch(1 0 0 / 90%);
-}
-
-/* Make dark the default; .light overrides */
-.dark {
-  /* same as root */
+  --glass-highlight: oklch(1 0 0 / 85%);
 }
 
 @layer base {
@@ -142,14 +135,11 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    overflow-x: clip;
   }
 
   html.light {
     color-scheme: light;
-  }
-
-  html {
-    overflow-x: clip;
   }
 
   body {
@@ -169,10 +159,10 @@
     color: var(--color-foreground);
   }
 
-  /* Custom scrollbar */
+  /* Custom scrollbar - Optimized */
   ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
@@ -180,38 +170,27 @@
   ::-webkit-scrollbar-thumb {
     background: var(--glass-3);
     border-radius: 999px;
-    border: 2px solid transparent;
-    background-clip: padding-box;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--glass-4);
-    background-clip: padding-box;
-    border: 2px solid transparent;
   }
 }
 
-/* ---- Glass primitives ---- */
+/* ---- Optimized Glass primitives - Reduced Blur for performance ---- */
 @utility glass {
   background: var(--glass-2);
-  backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(12px) saturate(140%);
   border: 1px solid var(--glass-border);
-  box-shadow:
-    inset 0 1px 0 0 var(--glass-highlight),
-    0 30px 60px -25px rgb(0 0 0 / 0.55);
+  box-shadow: 0 20px 40px -20px rgb(0 0 0 / 0.4);
 }
 
 @utility glass-strong {
   background: var(--glass-4);
-  backdrop-filter: blur(36px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(160%);
   border: 1px solid var(--glass-border);
-  box-shadow:
-    inset 0 1px 0 0 var(--glass-highlight),
-    0 40px 80px -30px rgb(0 0 0 / 0.6);
+  box-shadow: 0 30px 60px -25px rgb(0 0 0 / 0.5);
 }
 
 @utility glass-subtle {
   background: var(--glass-1);
-  backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(8px) saturate(120%);
   border: 1px solid var(--glass-border);
 }
 
@@ -227,109 +206,75 @@
   color: transparent;
 }
 
-@utility brand-gradient {
-  background: linear-gradient(
-    135deg,
-    var(--color-brand-1),
-    var(--color-brand-2),
-    var(--color-brand-3)
-  );
-}
-
 @utility font-display {
   font-family: var(--font-display);
   font-feature-settings: "ss01", "ss02";
   letter-spacing: -0.02em;
 }
 
-@utility font-mono {
-  font-family: var(--font-mono);
-}
-
-@utility font-arabic {
-  font-family: var(--font-arabic);
-}
-
-/* Aurora background blob */
+/* Aurora background blob - Radical Optimization */
 @utility aurora {
   position: absolute;
-  inset: -20%;
+  inset: -10%;
   background:
-    radial-gradient(40% 50% at 20% 30%, color-mix(in oklab, var(--aurora-a) 35%, transparent), transparent 70%),
-    radial-gradient(35% 45% at 80% 20%, color-mix(in oklab, var(--aurora-b) 32%, transparent), transparent 70%),
-    radial-gradient(45% 55% at 60% 80%, color-mix(in oklab, var(--aurora-c) 28%, transparent), transparent 70%);
-  filter: blur(60px) saturate(140%);
-  opacity: 0.7;
+    radial-gradient(50% 50% at 20% 30%, color-mix(in oklab, var(--aurora-a) 25%, transparent), transparent 80%),
+    radial-gradient(45% 45% at 80% 20%, color-mix(in oklab, var(--aurora-b) 22%, transparent), transparent 80%),
+    radial-gradient(55% 55% at 60% 80%, color-mix(in oklab, var(--aurora-c) 18%, transparent), transparent 80%);
+  filter: blur(40px);
+  opacity: 0.6;
   pointer-events: none;
   z-index: 0;
-  will-change: transform, opacity;
+  will-change: opacity;
   transform: translateZ(0);
-  contain: paint;
+  contain: strict;
 }
 
 .light .aurora {
-  opacity: 0.45;
+  opacity: 0.35;
 }
 
-/* Pause heavy background animations when the tab isn't visible */
+/* Pause heavy background animations when the tab isn't visible or user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient, .animate-pulse-soft, .animate-float, .animate-spin-slow {
+    animation: none !important;
+  }
+}
+
 html:not(:focus-within) .animate-gradient,
 html:not(:focus-within) .animate-pulse-soft,
 html:not(:focus-within) .animate-float,
 html:not(:focus-within) .animate-spin-slow {
-  animation-play-state: paused;
+  animation-play-state: paused !important;
 }
 
-/* Noise overlay */
+/* Noise overlay - Performance optimized */
 .noise::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.02;
   mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-/* Magnetic hover helpers */
+/* Animations - Slowed down and simplified */
 @keyframes float-y {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-@keyframes spin-slow {
-  to { transform: rotate(360deg); }
-}
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  50% { transform: translateY(-4px); }
 }
 @keyframes gradient-pan {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
 @keyframes pulse-soft {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.04); }
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
 }
 
-.animate-float { animation: float-y 6s ease-in-out infinite; }
-.animate-spin-slow { animation: spin-slow 24s linear infinite; }
-.animate-gradient { background-size: 200% 200%; animation: gradient-pan 8s ease-in-out infinite; }
-.animate-pulse-soft { animation: pulse-soft 2.6s ease-in-out infinite; }
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* RTL helpers */
-[dir="rtl"] .rtl-flip {
-  transform: scaleX(-1);
-}
+.animate-float { animation: float-y 8s ease-in-out infinite; }
+.animate-gradient { background-size: 200% 200%; animation: gradient-pan 12s ease-in-out infinite; }
+.animate-pulse-soft { animation: pulse-soft 3.5s ease-in-out infinite; }
 
 /* Safe area for floating buttons on iOS */
 .safe-bottom { padding-bottom: max(env(safe-area-inset-bottom), 16px); }
