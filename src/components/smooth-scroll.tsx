@@ -11,9 +11,14 @@ export function SmoothScroll() {
       smoothWheel: true,
     });
     let raf = 0;
+    let lastTime = 0;
     const loop = (time: number) => {
       if (document.visibilityState === "visible") {
-        lenis.raf(time);
+        // Throttle to ~60fps to prevent over-working on high-refresh displays
+        if (time - lastTime >= 16) {
+          lenis.raf(time);
+          lastTime = time;
+        }
       }
       raf = requestAnimationFrame(loop);
     };

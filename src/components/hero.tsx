@@ -50,8 +50,8 @@ export function Hero() {
 
       <div className="relative z-[2] mx-auto grid w-full max-w-6xl gap-10 px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           className="inline-flex items-center gap-2 self-start rounded-full glass-subtle px-3 py-1.5 text-[11px] uppercase tracking-[0.2em] text-muted-foreground"
         >
@@ -60,8 +60,8 @@ export function Hero() {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 40, filter: "blur(14px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.18 }}
           className="font-display text-[clamp(2.6rem,9vw,7rem)] leading-[0.95] tracking-[-0.03em]"
         >

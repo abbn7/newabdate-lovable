@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://newabdate-lovable.pages.dev/" }],
   }),
   component: HomePage,
 });
@@ -44,7 +44,7 @@ function HomePage() {
       <section id="about" className="relative px-4 py-12 sm:py-16">
         <div className="mx-auto max-w-6xl">
           <SectionReveal>
-            <SectionHeader kicker={t("about.kicker")} title={t("about.title")} />
+            <SectionHeader kicker={t("about.kicker")} title={t("about.title")} as="h2" />
           </SectionReveal>
 
           <div className="mt-12 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
@@ -68,7 +68,7 @@ function HomePage() {
 
             <SectionReveal delay={0.08}>
               <GlassCard className="p-8 sm:p-10 h-full">
-                <h3 className="font-display text-2xl">{t("about.education")}</h3>
+                <h2 className="font-display text-2xl">{t("about.education")}</h2>
                 <ul className="mt-6 space-y-5">
                   <li className="border-l-2 border-[var(--glass-border)] ps-4">
                     <div className="text-sm text-muted-foreground">2024 — Present</div>
@@ -101,7 +101,7 @@ function HomePage() {
       <section className="relative px-4 py-12 sm:py-16">
         <div className="mx-auto max-w-6xl">
           <SectionReveal>
-            <SectionHeader kicker={t("skills.kicker")} title={t("skills.title")} />
+            <SectionHeader kicker={t("skills.kicker")} title={t("skills.title")} as="h2" />
           </SectionReveal>
 
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -132,7 +132,7 @@ function HomePage() {
       <section className="relative px-4 py-12 sm:py-16">
         <div className="mx-auto max-w-6xl">
           <SectionReveal>
-            <SectionHeader kicker={t("projects.kicker")} title={t("projects.title")} />
+            <SectionHeader kicker={t("projects.kicker")} title={t("projects.title")} as="h2" />
           </SectionReveal>
 
           <SectionReveal delay={0.1}>
@@ -210,7 +210,7 @@ function HomePage() {
       <section className="relative px-4 py-12 sm:py-16">
         <div className="mx-auto max-w-6xl">
           <SectionReveal>
-            <SectionHeader kicker={t("process.kicker")} title={t("process.title")} />
+            <SectionHeader kicker={t("process.kicker")} title={t("process.title")} as="h2" />
           </SectionReveal>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {process.map((p, i) => (

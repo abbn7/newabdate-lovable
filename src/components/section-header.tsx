@@ -5,18 +5,20 @@ export function SectionHeader({
   title,
   sub,
   align = "start",
+  as: Tag = "h2",
 }: {
   kicker: string;
   title: string;
   sub?: string;
   align?: "start" | "center";
+  as?: "h1" | "h2" | "h3";
 }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-3xl"}>
       <Kicker>{kicker}</Kicker>
-      <h2 className="mt-4 font-display text-[clamp(2rem,5vw,3.6rem)] leading-[1.02] tracking-[-0.02em]">
+      <Tag className="mt-4 font-display text-[clamp(2rem,5vw,3.6rem)] leading-[1.02] tracking-[-0.02em]">
         {title}
-      </h2>
+      </Tag>
       {sub && <p className="mt-4 text-base text-muted-foreground">{sub}</p>}
     </div>
   );
